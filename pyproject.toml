@@ -1,0 +1,36 @@
+[tool.poetry]
+name = "gunicorn-uvicorn-runner"
+version = "0.1.0"
+description = "Run either gunicorn or uvicorn depending on whether reloading is needed."
+authors = ["Jeremy Epstein <jazepstein@gmail.com>"]
+homepage = "https://github.com/Jaza/gunicorn-uvicorn-runner"
+readme = "README.md"
+license = "Apache-2.0"
+packages = [{include = "gunicorn_uvicorn_runner"}]
+
+[tool.poetry.dependencies]
+python = ">=3.10,<4"
+uvicorn = {extras = ["standard"], version = "*"}
+gunicorn = "*"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "*"
+black = "*"
+flake8 = "*"
+mypy = "*"
+isort = "*"
+pytest-cov = "*"
+autoflake = "*"
+bandit = "*"
+
+[tool.mypy]
+ignore_missing_imports = true
+
+[tool.isort]
+profile = "black"
+lines_after_imports = 2
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
