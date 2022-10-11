@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "gunicorn-uvicorn-runner"
-version = "0.1.0"
+version = "0.1.1"
 description = "Run either gunicorn or uvicorn depending on whether reloading is needed."
 authors = ["Jeremy Epstein <jazepstein@gmail.com>"]
 homepage = "https://github.com/Jaza/gunicorn-uvicorn-runner"
@@ -22,7 +22,7 @@ mypy = "*"
 isort = "*"
 pytest-cov = "*"
 autoflake = "*"
-bandit = "*"
+bandit = {extras = ["toml"], version = "*"}
 
 [tool.mypy]
 ignore_missing_imports = true
@@ -30,6 +30,9 @@ ignore_missing_imports = true
 [tool.isort]
 profile = "black"
 lines_after_imports = 2
+
+[tool.bandit]
+skips = ["B101"]
 
 [build-system]
 requires = ["poetry-core"]
