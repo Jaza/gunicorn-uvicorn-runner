@@ -4,7 +4,7 @@ import uvicorn
 from gunicorn.app.wsgiapp import WSGIApplication
 
 
-def number_of_workers() -> int:
+def get_default_number_of_workers() -> int:
     return (multiprocessing.cpu_count() * 2) + 1
 
 
@@ -33,18 +33,30 @@ class StandaloneApplication(WSGIApplication):  # pragma: no cover
             self.cfg.set(key.lower(), value)
 
 
-def _run_gunicorn(app_uri: str, web_host: str, web_port: int):
+def _run_gunicorn(
+    app_uri: str, web_host: str, web_port: int, number_of_workers: int | None = None
+):
     options = {
         "bind": f"{web_host}:{web_port}",
-        "workers": number_of_workers(),
+        "workers": (
+            number_of_workers
+            if number_of_workers is not None
+            else get_default_number_of_workers()
+        ),
         "worker_class": "uvicorn.workers.UvicornWorker",
     }
     StandaloneApplication(app_uri, options).run()
 
 
-def run_gunicorn_or_uvicorn(app_uri: str, web_host: str, web_port: int, reload: bool):
+def run_gunicorn_or_uvicorn(
+    app_uri: str,
+    web_host: str,
+    web_port: int,
+    reload: bool,
+    number_of_workers: int | None = None,
+):
     """Run either gunicorn or uvicorn depending on whether reloading is needed."""
     if reload:
         _run_uvicorn(app_uri, web_host, web_port)
     else:
-        _run_gunicorn(app_uri, web_host, web_port)
+        _run_gunicorn(app_uri, web_host, web_port, number_of_workers=number_of_workers)

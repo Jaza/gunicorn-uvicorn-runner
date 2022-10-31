@@ -1,7 +1,7 @@
-from .core import number_of_workers, run_gunicorn_or_uvicorn
+from .core import get_default_number_of_workers, run_gunicorn_or_uvicorn
 
 
 __all__ = [
-    "number_of_workers",
+    "get_default_number_of_workers",
     "run_gunicorn_or_uvicorn",
 ]
