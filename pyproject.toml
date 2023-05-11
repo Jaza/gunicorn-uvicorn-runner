@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "gunicorn-uvicorn-runner"
-version = "0.1.2"
+version = "0.1.3"
 description = "Run either gunicorn or uvicorn depending on whether reloading is needed."
 authors = ["Jeremy Epstein <jazepstein@gmail.com>"]
 homepage = "https://github.com/Jaza/gunicorn-uvicorn-runner"
